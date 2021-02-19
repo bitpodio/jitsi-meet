@@ -16,6 +16,8 @@ import ChatInput from './ChatInput';
 import DisplayNameForm from './DisplayNameForm';
 import MessageContainer from './MessageContainer';
 import MessageRecipient from './MessageRecipient';
+import ChatIframe from './ChatIframe';
+import Tabs from '@atlaskit/tabs';
 
 /**
  * React Component for holding the chat feature in a side panel that slides in
@@ -86,6 +88,7 @@ class Chat extends AbstractChat<Props> {
         return (
             <>
                 { this._renderPanelContent() }
+                {/* <Tabs tabs={tabs} /> */}
             </>
         );
     }
@@ -110,7 +113,9 @@ class Chat extends AbstractChat<Props> {
      * @private
      * @returns {ReactElement}
      */
+    
     _renderChat() {
+        debugger
         return (
             <>
                 <MessageContainer
@@ -123,6 +128,7 @@ class Chat extends AbstractChat<Props> {
             </>
         );
     }
+
 
     /**
      * Instantiates a React Element to display at the top of {@code Chat} to
@@ -152,17 +158,23 @@ class Chat extends AbstractChat<Props> {
         let ComponentToRender = null;
 
         if (_isOpen) {
+            const tabs = [
+                { label: 'Tab 1', content:  _showNamePrompt ? <DisplayNameForm /> : this._renderChat() },
+                { label: 'Tab 2', content: <ChatIframe />},
+              ];
             if (_isModal) {
                 ComponentToRender = (
                     <ChatDialog>
-                        { _showNamePrompt ? <DisplayNameForm /> : this._renderChat() }
+                        {/* { _showNamePrompt ? <DisplayNameForm /> : this._renderChat() } */}
+                        <Tabs tabs={tabs} />
                     </ChatDialog>
                 );
             } else {
                 ComponentToRender = (
                     <>
                         { this._renderChatHeader() }
-                        { _showNamePrompt ? <DisplayNameForm /> : this._renderChat() }
+                        {/* { _showNamePrompt ? <DisplayNameForm /> : this._renderChat() } */}
+                        <Tabs tabs={tabs} />
                     </>
                 );
             }
@@ -181,6 +193,7 @@ class Chat extends AbstractChat<Props> {
                 id = 'sideToolbarContainer'>
                 { ComponentToRender }
             </div>
+           
         );
     }
 
@@ -200,3 +213,4 @@ class Chat extends AbstractChat<Props> {
 }
 
 export default translate(connect(_mapStateToProps, _mapDispatchToProps)(Chat));
+
