@@ -18,6 +18,7 @@ import MessageContainer from './MessageContainer';
 import MessageRecipient from './MessageRecipient';
 import ChatIframe from './ChatIframe';
 import Tabs from '@atlaskit/tabs';
+import interfaceConfigWhitelist from '../../../base/config/interfaceConfigWhitelist';
 
 /**
  * React Component for holding the chat feature in a side panel that slides in
@@ -158,26 +159,45 @@ class Chat extends AbstractChat<Props> {
         let ComponentToRender = null;
 
         if (_isOpen) {
-            const tabs = [
-                { label: 'Tab 1', content:  _showNamePrompt ? <DisplayNameForm /> : this._renderChat() },
-                { label: 'Tab 2', content: <ChatIframe />},
-              ];
-            if (_isModal) {
-                ComponentToRender = (
-                    <ChatDialog>
-                        {/* { _showNamePrompt ? <DisplayNameForm /> : this._renderChat() } */}
-                        <Tabs tabs={tabs} />
-                    </ChatDialog>
-                );
-            } else {
-                ComponentToRender = (
-                    <>
-                        { this._renderChatHeader() }
-                        {/* { _showNamePrompt ? <DisplayNameForm /> : this._renderChat() } */}
-                        <Tabs tabs={tabs} />
-                    </>
-                );
+            if(interfaceConfig.CHAT_TOKEN && interfaceConfig.CHAT_TOKEN) {
+                const tabs = [
+                    { label: 'Tab 1', content:  _showNamePrompt ? <DisplayNameForm /> : this._renderChat() },
+                    { label: 'Tab 2', content: <ChatIframe />},
+                  ];
+                if (_isModal) {
+                    ComponentToRender = (
+                        <ChatDialog>
+                            {/* { _showNamePrompt ? <DisplayNameForm /> : this._renderChat() } */}
+                            <Tabs tabs={tabs} />
+                        </ChatDialog>
+                    );
+                } else {
+                    ComponentToRender = (
+                        <>
+                            { this._renderChatHeader() }
+                            {/* { _showNamePrompt ? <DisplayNameForm /> : this._renderChat() } */}
+                            <Tabs tabs={tabs} />
+                        </>
+                    );
+                }
             }
+            else {
+                if (_isModal) {
+                    ComponentToRender = (
+                        <ChatDialog>
+                            { _showNamePrompt ? <DisplayNameForm /> : this._renderChat() }
+                        </ChatDialog>
+                    );
+                } else {
+                    ComponentToRender = (
+                        <>
+                            { this._renderChatHeader() }
+                            { _showNamePrompt ? <DisplayNameForm /> : this._renderChat() }
+                        </>
+                    );
+                }
+            }
+            
         }
         let className = '';
 
