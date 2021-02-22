@@ -116,7 +116,6 @@ class Chat extends AbstractChat<Props> {
      */
     
     _renderChat() {
-        debugger
         return (
             <>
                 <MessageContainer
@@ -167,7 +166,6 @@ class Chat extends AbstractChat<Props> {
                 if (_isModal) {
                     ComponentToRender = (
                         <ChatDialog>
-                            {/* { _showNamePrompt ? <DisplayNameForm /> : this._renderChat() } */}
                             <Tabs tabs={tabs} />
                         </ChatDialog>
                     );
@@ -175,7 +173,6 @@ class Chat extends AbstractChat<Props> {
                     ComponentToRender = (
                         <>
                             { this._renderChatHeader() }
-                            {/* { _showNamePrompt ? <DisplayNameForm /> : this._renderChat() } */}
                             <Tabs tabs={tabs} />
                         </>
                     );
