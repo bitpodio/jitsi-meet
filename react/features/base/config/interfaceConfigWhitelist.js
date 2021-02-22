@@ -56,5 +56,7 @@ export default [
     'VIDEO_LAYOUT_FIT',
     'VIDEO_QUALITY_LABEL_DISABLED',
     'CHAT_CHANNEL',
-    'CHAT_TOKEN'
+    'CHAT_TOKEN',
+    'BACKGROUND_IMAGE',
+    'RTMP_URL'
 ];
