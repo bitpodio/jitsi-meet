@@ -161,8 +161,8 @@ class Chat extends AbstractChat<Props> {
         if (_isOpen) {
             if(interfaceConfig.CHAT_TOKEN && interfaceConfig.CHAT_TOKEN) {
                 const tabs = [
-                    { label: 'Tab 1', content:  _showNamePrompt ? <DisplayNameForm /> : this._renderChat() },
-                    { label: 'Tab 2', content: <ChatIframe />},
+                    { label: 'Backstage', content:  _showNamePrompt ? <DisplayNameForm /> : this._renderChat() },
+                    { label: 'Live', content: <ChatIframe />},
                   ];
                 if (_isModal) {
                     ComponentToRender = (
