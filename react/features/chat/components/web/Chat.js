@@ -89,7 +89,6 @@ class Chat extends AbstractChat<Props> {
         return (
             <>
                 { this._renderPanelContent() }
-                {/* <Tabs tabs={tabs} /> */}
             </>
         );
     }
@@ -158,7 +157,7 @@ class Chat extends AbstractChat<Props> {
         let ComponentToRender = null;
 
         if (_isOpen) {
-            if(interfaceConfig.CHAT_TOKEN && interfaceConfig.CHAT_TOKEN) {
+            if(interfaceConfig.CHAT_TOKEN && interfaceConfig.CHAT_CHANNEL) {
                 const tabs = [
                     { label: 'Backstage', content:  _showNamePrompt ? <DisplayNameForm /> : this._renderChat() },
                     { label: 'Live', content: <ChatIframe />},
