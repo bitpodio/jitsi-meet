@@ -119,8 +119,8 @@ class DeepLinkingMobilePage extends Component<Props> {
                         HIDE_DEEP_LINKING_LOGO
                             ? null
                             : <img
-                                className = 'logo'
-                                src = 'images/logo-deep-linking.png' />
+                                className = 'logo mobile-logo'
+                                src = 'https://res.cloudinary.com/mytestlogo/image/upload/bitpodjs/images/bitpod-logo-new.png' />
                     }
                 </div>
                 <div className = { `${_SNS}__body` }>
@@ -131,6 +131,11 @@ class DeepLinkingMobilePage extends Component<Props> {
                                 src = 'images/deep-linking-image.png' />
                             : null
                     }
+                    <div>
+                    <h1 className = 'header-text-title'>
+                            { t('welcomepage.headerTitle') }
+                        </h1>
+                    </div>
                     <p className = { `${_SNS}__text` }>
                         { t(`${_TNS}.appNotInstalled`, { app: NATIVE_APP_NAME }) }
                     </p>
