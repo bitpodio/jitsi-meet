@@ -16,7 +16,11 @@ import DisplayNameForm from './DisplayNameForm';
 import KeyboardAvoider from './KeyboardAvoider';
 import MessageContainer from './MessageContainer';
 import MessageRecipient from './MessageRecipient';
+import ChatIframe from './ChatIframe';
+import Tabs from '@atlaskit/tabs';
+import interfaceConfigWhitelist from '../../../base/config/interfaceConfigWhitelist';
 import TouchmoveHack from './TouchmoveHack';
+
 
 /**
  * React Component for holding the chat feature in a side panel that slides in
@@ -109,6 +113,7 @@ class Chat extends AbstractChat<Props> {
      * @private
      * @returns {ReactElement}
      */
+    
     _renderChat() {
         return (
             <>
@@ -125,6 +130,7 @@ class Chat extends AbstractChat<Props> {
             </>
         );
     }
+
 
     /**
      * Instantiates a React Element to display at the top of {@code Chat} to
@@ -152,20 +158,43 @@ class Chat extends AbstractChat<Props> {
         let ComponentToRender = null;
 
         if (_isOpen) {
-            if (_isModal) {
-                ComponentToRender = (
-                    <ChatDialog>
-                        { _showNamePrompt ? <DisplayNameForm /> : this._renderChat() }
-                    </ChatDialog>
-                );
-            } else {
-                ComponentToRender = (
-                    <>
-                        { this._renderChatHeader() }
-                        { _showNamePrompt ? <DisplayNameForm /> : this._renderChat() }
-                    </>
-                );
+            if(interfaceConfig.CHAT_TOKEN && interfaceConfig.CHAT_CHANNEL) {
+                const tabs = [
+                    { label: 'Backstage', content:  _showNamePrompt ? <DisplayNameForm /> : this._renderChat() },
+                    { label: 'Live', content: <ChatIframe />},
+                  ];
+                if (_isModal) {
+                    ComponentToRender = (
+                        <ChatDialog>
+                            <Tabs tabs={tabs} />
+                        </ChatDialog>
+                    );
+                } else {
+                    ComponentToRender = (
+                        <>
+                            { this._renderChatHeader() }
+                            <Tabs tabs={tabs} />
+                        </>
+                    );
+                }
             }
+            else {
+                if (_isModal) {
+                    ComponentToRender = (
+                        <ChatDialog>
+                            { _showNamePrompt ? <DisplayNameForm /> : this._renderChat() }
+                        </ChatDialog>
+                    );
+                } else {
+                    ComponentToRender = (
+                        <>
+                            { this._renderChatHeader() }
+                            { _showNamePrompt ? <DisplayNameForm /> : this._renderChat() }
+                        </>
+                    );
+                }
+            }
+            
         }
         let className = '';
 
@@ -181,6 +210,7 @@ class Chat extends AbstractChat<Props> {
                 id = 'sideToolbarContainer'>
                 { ComponentToRender }
             </div>
+           
         );
     }
 
@@ -201,4 +231,4 @@ class Chat extends AbstractChat<Props> {
     _onSendMessage: (string) => void;
 }
 
-export default translate(connect(_mapStateToProps)(Chat));
+export default translate(connect(_mapStateToProps, _mapDispatchToProps)(Chat));
