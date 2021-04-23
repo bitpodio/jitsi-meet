@@ -100,7 +100,7 @@ export default class AbstractStartLiveStreamDialog<P: Props>
             broadcasts: undefined,
             errorType: undefined,
             selectedBoundStreamID: undefined,
-            streamKey: ''
+            streamKey: interfaceConfig.RTMP_URL
         };
 
         /**

@@ -231,4 +231,4 @@ class Chat extends AbstractChat<Props> {
     _onSendMessage: (string) => void;
 }
 
-export default translate(connect(_mapStateToProps, _mapDispatchToProps)(Chat));
+export default translate(connect(_mapStateToProps)(Chat));

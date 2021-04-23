@@ -50,7 +50,7 @@ class StreamKeyForm extends AbstractStreamKeyForm<Props> {
                     onChange = { this._onInputChange }
                     shouldFitContainer = { true }
                     type = 'text'
-                    value = { this.props.value === undefined ? interfaceConfig.RTMP_URL : this.props.value} />
+                    value = { this.props.value } />
             </div>
         );
     }
