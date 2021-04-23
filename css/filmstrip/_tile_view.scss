@@ -16,7 +16,7 @@
         display: flex;
         flex-direction: column;
         height: 100%;
-        width: 100vw;
+        width: 100%;
     }
 
     .filmstrip__videos .videocontainer {
@@ -42,19 +42,14 @@
         height: 100%;
         justify-content: center;
         left: 0;
-        position: fixed;
+        position: absolute;
         top: 0;
         width: 100%;
-        z-index: $filmstripVideosZ;
 
         @media (min-width: 581px) {
             &.shift-right {
                 margin-left: $sidebarWidth;
                 width: calc(100% - #{$sidebarWidth});
-
-                #filmstripRemoteVideos {
-                    width: calc(100vw - #{$sidebarWidth});
-                }
             }
         }
     }
@@ -120,5 +115,17 @@
 
     .has-overflow .videocontainer {
         align-self: baseline;
+    }
+}
+
+.shift-right #filmstripRemoteVideosContainer {
+    /**
+     * Max-width corresponding to the ASPECT_RATIO_BREAKPOINT from features/filmstrip/constants,
+     * from which we subtract the chat size.
+     */
+    @media only screen and (max-width: calc(500px + #{$sidebarWidth})) {
+        video {
+            object-fit: cover;
+        }
     }
 }
