@@ -56,6 +56,10 @@ body {
     fill: #5E6D7A;
 }
 
+.disabled .jitsi-icon svg {
+    fill: #929292;
+}
+
 .jitsi-icon.gray svg {
     fill: #5E6D7A;
     cursor: pointer;
